@@ -4,6 +4,7 @@
 #include <Log/Log.h>
 #include <EventSystem/event.h>
 #include <InputSystem/InputSystem.h>
+#include <AudioSystem/AudioSystem.h>
 
 void func()
 {
@@ -28,6 +29,11 @@ int main()
     window.Init();
 
     zuzu::InputSystem::Init(window.GetWindow());
+
+    zuzu::AudioManager am;
+    am.addSound("patlama", "assets/explosion.mp3", true); // true / false = loop
+
+    am.playSound("patlama");
 
     while(!window.IsClosed())
     {
