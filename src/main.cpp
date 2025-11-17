@@ -5,6 +5,8 @@
 #include <EventSystem/event.h>
 #include <InputSystem/InputSystem.h>
 #include <AudioSystem/AudioSystem.h>
+#include <FPSCounter.h>
+
 
 void func()
 {
@@ -31,9 +33,11 @@ int main()
     zuzu::InputSystem::Init(window.GetWindow());
 
     zuzu::AudioManager am;
-    am.addSound("patlama", "assets/explosion.mp3", true); // true / false = loop
+    am.addSound("patlama", "assets/explosion.mp3", false); // true / false = loop
 
     am.playSound("patlama");
+
+    zuzu::FPSCounter::Init();
 
     while(!window.IsClosed())
     {
@@ -42,6 +46,9 @@ int main()
         zuzu::InputSystem::Update();
 
         if (zuzu::InputSystem::isKeyPressed(GLFW_KEY_A)) ZUZU_LOG_TRACE("A");
+
+        float fps = zuzu::FPSCounter::GetFPS();
+        float dt = zuzu::FPSCounter::GetDeltaTime();
         
         window.Update(); // end
     }
